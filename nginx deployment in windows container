@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+RUN ["powershell","wget","http://nginx.org/download/nginx-1.27.2.zip","-UseBasicParsing","-OutFile","c:\\nginx.zip"]
+RUN ["powershell","Expand-Archive","c:\\nginx.zip","-Dest","c:\\nginx"]
+WORKDIR c:\\nginx\\nginx-1.27.2
+ENTRYPOINT ["powershell",".\\nginx.exe"]
+
+
+#-----------------------------------------------------
+# docker build -t nginx .
+# docker run -dt --name nginx -p 80:80 nginx
